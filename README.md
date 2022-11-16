@@ -47,3 +47,29 @@ NAME      READY   UP-TO-DATE   AVAILABLE   AGE
 rainbow   1/1     1            1           16s
 unicorn   1/1     1            1           16s
 ```
+
+To cleanup everything just run 
+
+```console
+$ make clean
+kubectl delete template -A --all
+template.templating.flanksource.com "bash" deleted
+kubectl delete edgeapplicationoverriders -A --all
+edgeapplicationoverrider.edgeapplication.kubeedge "rainbow" deleted
+edgeapplicationoverrider.edgeapplication.kubeedge "unicorn" deleted
+kubectl delete crd edgeapplicationoverriders.edgeapplication.kubeedge
+customresourcedefinition.apiextensions.k8s.io "edgeapplicationoverriders.edgeapplication.kubeedge" deleted
+kubectl delete -f https://github.com/flanksource/template-operator/releases/download/v0.7.0/operator.yml
+namespace "template-operator" deleted
+customresourcedefinition.apiextensions.k8s.io "rests.templating.flanksource.com" deleted
+customresourcedefinition.apiextensions.k8s.io "templates.templating.flanksource.com" deleted
+serviceaccount "template-operator-manager" deleted
+role.rbac.authorization.k8s.io "template-operator-leader-election-role" deleted
+clusterrole.rbac.authorization.k8s.io "template-operator-manager-role" deleted
+rolebinding.rbac.authorization.k8s.io "template-operator-leader-election-rolebinding" deleted
+clusterrolebinding.rbac.authorization.k8s.io "template-operator-manager-rolebinding" deleted
+service "template-operator-template-operator" deleted
+deployment.apps "template-operator-controller-manager" deleted
+kubectl delete ns template
+namespace "template" deleted
+```
