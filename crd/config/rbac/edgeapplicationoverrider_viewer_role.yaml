@@ -1,0 +1,27 @@
+# permissions for end users to view edgeapplicationoverriders.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: edgeapplicationoverrider-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: template
+    app.kubernetes.io/part-of: template
+    app.kubernetes.io/managed-by: kustomize
+  name: edgeapplicationoverrider-viewer-role
+rules:
+- apiGroups:
+  - edgeapplication.kubeedge
+  resources:
+  - edgeapplicationoverriders
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - edgeapplication.kubeedge
+  resources:
+  - edgeapplicationoverriders/status
+  verbs:
+  - get

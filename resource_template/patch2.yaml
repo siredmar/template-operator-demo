@@ -1,0 +1,11 @@
+kind: EdgeApplicationOverrider
+apiVersion: edgeapplication.kubeedge/v1alpha1
+metadata:
+  name: rainbow
+  namespace: template
+  labels:
+    type: application
+spec:
+  values:
+    deploymentName: rainbow
+    containerName: rainbow-container

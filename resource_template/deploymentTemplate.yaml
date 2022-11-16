@@ -1,0 +1,33 @@
+apiVersion: templating.flanksource.com/v1
+kind: Template
+metadata:
+  name: bash
+  namespace: template
+spec:
+  source:
+    apiVersion: edgeapplication.kubeedge/v1alpha1
+    kind: EdgeApplicationOverrider
+    labelSelector:
+      matchLabels:
+        type: application
+  resources:
+    - kind: Deployment
+      apiVersion: apps/v1
+      metadata:
+        name: "{{.spec.values.deploymentName}}"
+        namespace: template
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: bash
+        template:
+          metadata:
+            labels:
+              app: bash
+          spec:
+            containers:
+              - image: bash
+                imagePullPolicy: IfNotPresent
+                command: ["bash", "-c", "sleep 99999999"]
+                name: "{{.spec.values.containerName}}"
